@@ -1,16 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { FormListComponent } from './form-list/form-list.component';
+import { RouterModule, Routes } from '@angular/router';
+import { FormComponent } from './form/form.component';
+import { FormService } from './form-service.service';
+import { HttpClientModule } from '@angular/common/http';
+
+const routes:Routes=[
+  {path:'',redirectTo:'/list', pathMatch:'full'},
+  {path:'list' ,component:FormListComponent},
+  {path:'form' ,component:FormComponent}
+]
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FormListComponent,
+    FormComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+    
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    FormService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

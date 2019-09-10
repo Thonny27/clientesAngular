@@ -1,0 +1,29 @@
+<div class="container table-striped">
+<button type="button" [routerLink]="['/form']" class="btn btn-primary">Crear</button>
+<div *ngIf="clientes?.length==0" class="alert alert-info">
+    no hay registros en la base de datos
+  </div>
+
+<table class="table table-striped" *ngIf="clientes?.length>0">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Edad</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{cliente.id}}</td>
+        <td>{{cliente.name}}</td>
+        <td>{{cliente.apellido}}</td>
+        <td>{{cliente.edad}}</td>
+        <td><button type="button" [routerLink]="['/form', cliente ]" class="btn btn-warning">Editar</button></td>
+        <td><button type="button" (click)='delete(cliente.id)' class="btn btn-danger">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
