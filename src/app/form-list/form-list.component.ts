@@ -19,14 +19,17 @@ export class FormListComponent implements OnInit {
 
   listAll():void{
     this.clienteService.getList().subscribe(
-      (cliente:any)=> this.clientes = cliente.persona)
+      (cliente:any)=> this.clientes = cliente)
   }
 
   delete(cliente):void{
     this.clienteService.delete(cliente).subscribe(
       Response =>{
         this.listAll();
-      });
+      },(err)=>{
+        this.listAll();
+      this.router.navigate(['list']);
+    });
   }
 
 }

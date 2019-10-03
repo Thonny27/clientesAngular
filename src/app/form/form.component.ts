@@ -8,8 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './form.component.html'
 })
 export class FormComponent implements OnInit {
-  private cliente:Cliente = {
-    id:0,
+  cliente:Cliente = {
+    id:null,
     nombre:'',
     apellido:'',
     edad:0
@@ -36,11 +36,15 @@ export class FormComponent implements OnInit {
   saveCliente():void{
     this.formService.save(this.cliente).subscribe(cliente =>{
       this.router.navigate(['list']);
+    }, (err)=>{
+      this.router.navigate(['list']);
     })
   }
 
   updateCliente():void{
     this.formService.update(this.cliente).subscribe(cliente =>{
+      this.router.navigate(['list']);
+    }, (err)=>{
       this.router.navigate(['list']);
     })
   }
