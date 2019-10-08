@@ -1,25 +1,58 @@
 <div class="container table-striped">
-<div class="col-sm-3 table-striped">
-<form>
-        <div class="form-group">
-          <label for="name">Nombre</label>
-          <input type="text" [(ngModel)]="cliente.nombre" class="form-control" name="nombre" placeholder="name">
+  <div class="col-sm-3 table-striped">
+    <form #clienteForm="ngForm">
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" [(ngModel)]="cliente.nombre" class="form-control" name="nombre" placeholder="name" required
+               minlength="4" #nombre="ngModel">
+        <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+          <div *ngIf="nombre.errors.required">
+            Nombre es requerido ...
+          </div>
+          <div *ngIf="nombre.errors.minlength">
+            Nombre debe tener como minimo 4 caracteres
+          </div>
         </div>
-        <div class="form-group">
-                <label for="name">Apellido</label>
-                <input type="text" class="form-control"[(ngModel)]="cliente.apellido"  name="apellido" placeholder="description">
-            </div>      
-            <div class="form-group">
-              <label for="name">Edad</label>
-              <input type="text" class="form-control"[(ngModel)]="cliente.edad"  name="edad" placeholder="description">
-          </div>    
-            <button type="submit" class="btn btn-primary" (click)='saveCliente()' *ngIf="!hasParams else updateButton">Guardar</button>
-            <button type="submit"  [routerLink]="['/list']"class="btn btn-primary">Cancelar</button>   
-      </form>
+      </div>
+      <div class="form-group">
+        <label for="name">Apellido</label>
+        <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido" placeholder="apellido"
+               required minlength="4" #apellido="ngModel">
+        <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+          <div *ngIf="apellido.errors.required">
+            Apellido es requerido ...
+          </div>
+          <div *ngIf="apellido.errors.minlength">
+            Apellido debe tener como minimo 4 caracteres
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Edad</label>
+        <input type="number" class="form-control" [(ngModel)]="cliente.edad" name="edad" placeholder="description"
+               required #edad="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="name">Fecha</label>
+        <br>
+        <mat-form-field>
+          <label for="name">Fecha</label>
+          <input matInput [matDatepicker]="picker" class="form-control" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)='saveCliente()' *ngIf="!hasParams else updateButton"
+              [disabled]="!clienteForm.form.valid">Guardar
+      </button>
+      <button type="submit" [routerLink]="['/list']" class="btn btn-primary">Cancelar</button>
+    </form>
 
-      <ng-template #updateButton>
-        <button type="submit" class="btn btn-primary" (click)='updateCliente()'>Actualizar</button>
-      </ng-template>
-      
-    </div>
+    <ng-template #updateButton>
+      <button type="submit" class="btn btn-primary" (click)='updateCliente()' [disabled]="!clienteForm.form.valid">
+        Actualizar
+      </button>
+    </ng-template>
+
+  </div>
 </div>

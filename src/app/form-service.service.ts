@@ -8,7 +8,7 @@ import { Cliente } from './cliente';
 })
 export class FormService {
 
-  private url='http://localhost:8080/gamarra/clientes';
+  private url='http://157.245.137.216:8080/gamarra/clientes';
   private httpHeaders= new HttpHeaders({'Content-Type':'application/json'})
 
   constructor(private http:HttpClient) { }
