@@ -32,16 +32,7 @@
         <input type="number" class="form-control" [(ngModel)]="cliente.edad" name="edad" placeholder="description"
                required #edad="ngModel">
       </div>
-      <div class="form-group">
-        <label for="name">Fecha</label>
-        <br>
-        <mat-form-field>
-          <label for="name">Fecha</label>
-          <input matInput [matDatepicker]="picker" class="form-control" placeholder="Choose a date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
+
       <button type="submit" class="btn btn-primary" (click)='saveCliente()' *ngIf="!hasParams else updateButton"
               [disabled]="!clienteForm.form.valid">Guardar
       </button>

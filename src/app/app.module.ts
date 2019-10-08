@@ -9,20 +9,23 @@ import {FormComponent} from './form/form.component';
 import {FormService} from './form-service.service';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatInputModule, MatNativeDateModule} from '@angular/material';
-import {MatDatepickerModule} from '@angular/material/datepicker'
+import {MatFormFieldModule, MatInputModule, MatNativeDateModule} from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {DetalleComponent} from './form/detalle/detalle.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/list', pathMatch: 'full'},
   {path: 'list', component: FormListComponent},
-  {path: 'form', component: FormComponent}
+  {path: 'form', component: FormComponent},
+  {path: 'form/ver/:id', component: DetalleComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     FormListComponent,
-    FormComponent
+    FormComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,
