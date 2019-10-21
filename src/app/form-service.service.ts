@@ -32,7 +32,14 @@ export class FormService {
   }
 
   getById(id: number): Observable<any> {
-    return this.http.get<Cliente>(this.url + `cliente/${id}`);
+    return this.http.get<Cliente>(this.url + `/cliente/${id}`);
+  }
+
+  upImage(file:File,id):Observable<any>{
+    let formData= new FormData();
+    formData.append("file",file);
+    formData.append("id",id);
+    return this.http.post(this.url+`/cliente/upload`,formData);
   }
 }
 
