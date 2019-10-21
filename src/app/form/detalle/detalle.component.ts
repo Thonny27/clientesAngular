@@ -2,6 +2,7 @@ import {Component, OnInit, ɵSWITCH_TEMPLATE_REF_FACTORY__POST_R3__} from '@angu
 import {Cliente} from '../../cliente';
 import {FormService} from '../../form-service.service';
 import {ActivatedRoute} from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-detalle',
@@ -32,14 +33,25 @@ export class DetalleComponent implements OnInit {
 
     this.imageSelection = event.target.files[0];
     console.log(this.imageSelection);
+    if(this.imageSelection.type.indexOf('image')<0){
+      Swal.fire('Eror: ','El archivo debe ser de tipo imagen',"error")
+      this.imageSelection = null;
+    }
 
   }
 
   upImage(){
 
+    if(!this.imageSelection){
+      Swal.fire('Eror: ','Debe seleccionar una foto',"error")
+    }else{
+
+    }
+
     this.clienteService.upImage(this.imageSelection,this.cliente.id)
     .subscribe((cliente: Cliente)=>{
       this.cliente = cliente;
+      Swal.fire("La imagen ha sido subida",`La foto se subio con exito: ${this.cliente.image}`,"success");
       console.log(this.cliente);
       
     });
